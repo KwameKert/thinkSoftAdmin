@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 import { ErrorInterceptor, TokenInterceptor} from './interceptors';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 //import { ChartsModule } from 'ng2-charts';
@@ -44,6 +45,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     MatMenuModule,
     MatButtonModule,
     MatListModule,
+    ChartsModule,
     NgxUiLoaderModule,
     MatSidenavModule,
     ToastrModule.forRoot(), 

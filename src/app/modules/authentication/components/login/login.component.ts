@@ -27,7 +27,10 @@ ngOnInit() {
 
 loginUser(){
   this.isLoading  = true;
-  this._router.navigate(['/admin']);
+  setTimeout(()=>{
+    this._router.navigate(['/admin'])
+  }, 3000)
+  ;
   // this._authService.login(this.loginForm.value).pipe(first())
   // .subscribe(
   //     data => {
@@ -54,4 +57,8 @@ loginUser(){
 
 
 }
+
+  redirect(){
+    this._router.navigate(['/admin'])
+  }
 }

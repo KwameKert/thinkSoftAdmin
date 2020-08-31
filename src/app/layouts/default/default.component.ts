@@ -16,4 +16,6 @@ export class DefaultComponent implements OnInit {
   toggleSidebar(){
     this.sideBarOpen = !this.sideBarOpen;
   }
+
+  
 }
