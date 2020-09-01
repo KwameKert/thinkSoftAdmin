@@ -22,10 +22,9 @@ export class AddUserComponent implements OnInit {
     this.userForm = this._fb.group({
       username: new FormControl('', [Validators.required, Validators.minLength(7)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      fullName: new FormControl('', Validators.required),
       password: new FormControl('123456', Validators.required),
       role: '',
-      stat: ''
+      status: ''
     })
   }
 
@@ -35,7 +34,7 @@ export class AddUserComponent implements OnInit {
 
     
 this.ngxService.start()
-    this._crudService.addItem(this.userForm.value, "users").subscribe(data=>{
+    this._crudService.addItem(this.userForm.value, "auth/admin/add").subscribe(data=>{
      this.userForm.reset();
       this._toastr.success(data.message, "Success  😊", {  timeOut:2000});
 

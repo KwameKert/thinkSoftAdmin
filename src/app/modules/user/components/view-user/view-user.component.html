@@ -8,7 +8,6 @@
     <div  class="row justify-content-center pt-4 ">
 
         <div class="col-6">
-            <p ><b>Full Name: </b>{{data.fullName}}</p>
             <p ><b>Username: </b>{{data.username}}</p>
             <p ><b>Email: </b>{{data.email}}</p>
            
@@ -17,8 +16,8 @@
         </div>
 
         <div class="col-6">
-            <p ><b>Role: </b>{{data.roles[0].role}}</p>
-            <p ><b>Created At: </b>{{data.createdAt | date:'mediumDate'}}</p>
+            <p ><b>Role: </b>{{data.role}}</p>
+            <p ><b>Created At: </b>{{data.createdAt | dateAgo}}</p>
         </div>
  
     

@@ -50,7 +50,7 @@ export class CrudService {
 
 
   public updateItem({data, module}): Observable<ApiResponse<any>>{
-    return this._httpClient.put<ApiResponse<any>>(`${this._baseUrl}/${module}/`, data);
+    return this._httpClient.patch<ApiResponse<any>>(`${this._baseUrl}/${module}`, data);
   }
 
 

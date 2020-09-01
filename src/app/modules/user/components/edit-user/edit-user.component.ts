@@ -30,9 +30,8 @@ export class EditUserComponent implements OnInit {
       id: this.userId,
       username: new FormControl('', [Validators.required, Validators.minLength(7)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      fullName: new FormControl('', Validators.required),
       role: '',
-      stat: ''
+      status: ''
     })
 
   }
@@ -41,7 +40,7 @@ export class EditUserComponent implements OnInit {
   addUser(){
 
     this.ngxService.start()
-    this._crudService.updateItem({data: this.userForm.value, module:"users"}).subscribe(data=>{
+    this._crudService.updateItem({data: this.userForm.value, module:`auth/admin/update/${this.userId}`}).subscribe(data=>{
      this.userForm.reset();
       this._toastr.success(data.message, "Success  😊", {  timeOut:2000});
 
@@ -62,14 +61,13 @@ export class EditUserComponent implements OnInit {
   findUser(id){
 
     if(id){
-      this._crudService.fetchItem({id: id, module: 'users'}).subscribe(data=>{
+      this._crudService.fetchItem({id: id, module: 'user/admin'}).subscribe(data=>{
         let result: any= data.data;
         this.userForm.patchValue({
           username: result.username,
           email: result.email,
-          fullName: result.fullName,
           role: result.role,
-          stat: result.stat,
+          status: result.stat,
           id: result.id,
         })
         
