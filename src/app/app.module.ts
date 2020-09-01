@@ -48,11 +48,13 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     ChartsModule,
     NgxUiLoaderModule,
     MatSidenavModule,
-    ToastrModule.forRoot(), 
-  
-    
+    ToastrModule.forRoot(),   
   ],
-  providers: [],
+  providers: [
+    DatePipe, 
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

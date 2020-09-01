@@ -1,51 +1,134 @@
 <div>
     <div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <mat-card>
                     <mat-card-content>
-                        <h3>23434</h3>
+                        <div class="row text-center">
+                            <div class="col-md-4 ">
+                                <mat-icon color="primary">playlist_add_check</mat-icon>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4>{{completeOrders}}</h4>
+                                <p class="lead"> Completed Orders</p>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                   
+                    </mat-card>
+        
+            </div>
+            
+            <div class="col-4">
+                <mat-card>
+                    <mat-card-content>
+                        <div class="row text-center">
+                            <div class="col-md-4 ">
+                                <mat-icon color="warn">hourglass_empty</mat-icon>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4>{{pendingOrders}}</h4>
+                                <p class="lead"> Pending Orders</p>
+                            </div>
+                        </div>
                     </mat-card-content>
                    
                     </mat-card>
         
             </div>
 
-            <div class="col-3">
+            <div class="col-4">
                 <mat-card>
                     <mat-card-content>
-                        <h3>23434</h3>
+                        <div class="row text-center">
+                            <div class="col-md-4 ">
+                                <mat-icon color="accent">attach_money</mat-icon>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4>6745</h4>
+                                <p class="lead"> Total Revenue</p>
+                            </div>
+                        </div>
                     </mat-card-content>
                    
                     </mat-card>
         
             </div>
 
-            <div class="col-3">
-                <mat-card>
-                    <mat-card-content>
-                        <h3>23434</h3>
-                    </mat-card-content>
-                   
-                    </mat-card>
-        
-            </div>
-
-            <div class="col-3">
-                <mat-card>
-                    <mat-card-content>
-                        <h3>23434</h3>
-                    </mat-card-content>
-                   
-                    </mat-card>
-        
-            </div>
 
          
         </div>
-      
-        have a table beneath 
-        remove users to settings
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>New Users</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <table mat-table [dataSource]="dataSource"  >
     
+              
+                            <ng-container matColumnDef="id">
+                              <th mat-header-cell *matHeaderCellDef> No. </th>
+                              <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+                            </ng-container>
+                          
+                          
+                            <ng-container matColumnDef="username">
+                              <th mat-header-cell *matHeaderCellDef>  Name </th>
+                              <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="phone">
+                              <th mat-header-cell *matHeaderCellDef> Phone </th>
+                              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef> Email </th>
+                                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                              </ng-container>
+                            <ng-container matColumnDef="createdAt">
+                              <th mat-header-cell *matHeaderCellDef> Created At  </th>
+                              <td mat-cell *matCellDef="let element"> {{element.createdAt | dateAgo }} </td>
+                            </ng-container>
+                  
+              
+                          
+                            <!-- Symbol Column -->
+                            <!-- <ng-container matColumnDef="actions" style="display: none">
+                              <th mat-header-cell *matHeaderCellDef> Actions </th>
+                              <td mat-cell *matCellDef="let element"> 
+                                <button mat-button [matMenuTriggerFor]="belowMenu" aria-label="Example icon-button with a menu">
+                                  <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #belowMenu="matMenu" yPosition="below">
+                                  <button mat-menu-item (click)="viewElection(element)">
+                                    <mat-icon>visibility</mat-icon>
+                                    <span>View Election </span>
+                                  </button>
+              
+                                  <button mat-menu-item (click)="editElection(element.id)">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Edit Election </span>
+                                  </button>
+                                  <button mat-menu-item (click)="deleteElection(element.id)">
+                                    <mat-icon>clear</mat-icon>
+                                    <span>Delete Election</span>
+                                  </button>
+                                </mat-menu>
+                              </td>
+                            </ng-container> -->
+                          
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+        </div>
+      
     </div>
   </div>

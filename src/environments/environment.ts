@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_host : "https://electionhub-api.herokuapp.com/api/v1"
+  api_host : "http://localhost:3000/api"
 };
 
 /*

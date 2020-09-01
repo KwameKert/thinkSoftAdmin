@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 constructor(private _router: Router, private _fb: FormBuilder,private _authService: AuthService, private _toastr: ToastrService) { }
 
 ngOnInit() {
+ 
   this.loginForm = this._fb.group({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -27,33 +28,29 @@ ngOnInit() {
 
 loginUser(){
   this.isLoading  = true;
-  setTimeout(()=>{
-    this._router.navigate(['/admin'])
-  }, 3000)
-  ;
-  // this._authService.login(this.loginForm.value).pipe(first())
-  // .subscribe(
-  //     data => {
-  //       switch(data.role){
-  //           case "ADMIN":
-  //             return this._router.navigate(['/admin/user/list']);
-  //             break;
-  //           case "COLLECTOR":
-  //               this.link = '/collector/dashboard';
-  //               break;
-  //           case "AUDITOR":
-  //               this.link = '/auditor/dashboard';    
-  //             break;
-  //           case "OWNER":
-  //               this.link = '/owner/dashboard';
-  //             break;
-  //         }
-  //     },
-  //     error => {
-  //       console.error("Opops an error occured")
-  //     }).add(()=>{
-  //       this.isLoading  = false;
-  //     });
+
+  this._authService.login(this.loginForm.value).pipe(first())
+  .subscribe(
+      data => {
+        switch(data.role){
+            case "ADMIN":
+              this._toastr.success("Login successful", "Success  😊", {  timeOut:2000});
+              return this._router.navigate(['/admin/user/list']);
+              break;
+            default:
+              this._toastr.success("Login successful", "Success  😊", {  timeOut:2000});
+              return this._router.navigate(['./admin/dashboard'])  
+           
+      }
+      
+    },
+      error => {
+       
+        this._toastr.error("Invalid credentials", "Oops ", {  timeOut:2000});
+        console.error("Opops an error occured")
+      }).add(()=>{
+        this.isLoading  = false;
+      });
 
 
 }

@@ -29,3 +29,27 @@
  
 
  
+
+  .sidebar-icon{
+    margin-right: 20px;
+}
+
+
+
+.li-icon {
+    margin-left:10px
+
+}
+
+a {
+
+  color: black
+}
+
+/* .mat-list-item{
+    padding-left: 10px !important;
+}
+
+.sub-menu {
+    margin-left: 15px !important;
+} */

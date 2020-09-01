@@ -23,12 +23,12 @@ import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatNativeDateModule } from '@angular/material/core';
-
-
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { AvatarModule } from 'ngx-avatar';
 
 
 @NgModule({
-  declarations: [DeleteItemComponent, ExcerptFilter, PreloaderComponent],
+  declarations: [DeleteItemComponent, ExcerptFilter, PreloaderComponent, DateAgoPipe],
   imports: [
     CommonModule,
     MatTableModule,
@@ -54,6 +54,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatStepperModule,
     MatNativeDateModule,
+    AvatarModule
     
   ],
   providers: [  
@@ -86,6 +87,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatStepperModule,
     MatNativeDateModule,
+    DateAgoPipe,
+    AvatarModule
   ],
   entryComponents: [DeleteItemComponent]
 })

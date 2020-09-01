@@ -35,13 +35,15 @@ export class AuthService {
   }
 
   login(data: object) {
-    return this._httpClient.post<ApiResponse<User>>(`${this._baseUrl}/auth/login`, data)
+    return this._httpClient.post<ApiResponse<User>>(`${this._baseUrl}/auth/admin/login`, data)
         .pipe(map(data => {
          
               // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(data.data));
             this.userSubject.next(data.data);
             return data.data;
+        })).pipe(map(status=>{
+          return status;
         }));
 }
 
