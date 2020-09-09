@@ -21,6 +21,8 @@ import { DatePipe } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { ErrorInterceptor, TokenInterceptor} from './interceptors';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { FleetManangerComponent } from './layouts/fleet-mananger/fleet-mananger.component';
+import { SuperAdminComponent } from './layouts/super-admin/super-admin.component';
 //import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -31,6 +33,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     SidebarComponent,
     FooterComponent,
     DefaultComponent,
+    FleetManangerComponent,
+    SuperAdminComponent,
 
   ],
   imports: [

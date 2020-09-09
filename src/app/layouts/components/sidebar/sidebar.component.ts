@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,19 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() links: Array<object>;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  links: Array<object> = [
-    {name: 'dashboard',url: '/admin/dashboard', icon: 'home'},
-    {name: 'Orders', url: 'election/list',  icon: 'shopping_basket'},
-    {name: 'Clients', url: 'category/list', icon: 'face'},
-    {name: 'Riders', url: 'position/list', icon: 'motorcycle'},
-    {name: 'Users', url: 'user/list', icon: 'supervised_user_circle'},
-  ]
+
     
+
 
 
 }
