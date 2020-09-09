@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   login(data: object) {
-    return this._httpClient.post<ApiResponse<User>>(`${this._baseUrl}/auth/admin/login`, data)
+    return this._httpClient.post<ApiResponse<any>>(`${this._baseUrl}/auth/admin/login`, data)
         .pipe(map(data => {
          
               // store user details and jwt token in local storage to keep user logged in between page refreshes

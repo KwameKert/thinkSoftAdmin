@@ -32,11 +32,19 @@ loginUser(){
   this._authService.login(this.loginForm.value).pipe(first())
   .subscribe(
       data => {
-        switch(data.role){
+        let user = data.user;
+        switch(user.role){
             case "ADMIN":
               this._toastr.success("Login successful", "Success  😊", {  timeOut:2000});
-              return this._router.navigate(['/admin/user/list']);
+              return this._router.navigate(['/admin']);
               break;
+
+              case "FLEET MANAGER":
+                this._toastr.success("Login as FLEET MANAGER", "Success  😊", {  timeOut:2000});
+                return this._router.navigate(['/fleet_manager']);
+                break;  
+             
+              
             default:
               this._toastr.success("Login successful", "Success  😊", {  timeOut:2000});
               return this._router.navigate(['./admin/dashboard'])  

@@ -17,7 +17,7 @@ export class FleetManangerComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  links: Array<object> = [
+  menuLinks: Array<object> = [
     {name: 'dashboard',url: '/admin/dashboard', icon: 'home'},
     {name: 'Orders', url: 'election/list',  icon: 'shopping_basket'},
     {name: 'Vehicle', url: 'category/list', icon: 'directions_car'},

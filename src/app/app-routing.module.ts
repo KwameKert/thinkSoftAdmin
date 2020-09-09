@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes ,PreloadAllModules} from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import {DefaultComponent} from './layouts/default/default.component';
-import {AdminModule} from './views/admin/admin.module';
+import { FleetManangerComponent } from './layouts/fleet-mananger/fleet-mananger.component';
 
 const routes: Routes= [
 {
@@ -18,6 +18,13 @@ const routes: Routes= [
   loadChildren: () => import('./views/admin/admin.module')
                      .then(m => m.AdminModule)
 },
+{
+  path:'fleet_manager', 
+  component: FleetManangerComponent,
+  loadChildren: () => import('./views/fleet-manager/fleet-manager.module')
+                     .then(m => m.FleetManagerModule)
+},
+
 
 // {
 //   path:'', 
