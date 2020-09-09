@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FleetManagerComponent implements OnInit {
 
+  pendingOrders = 234;
+  completeOrders = 123;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {FleetManagerComponent} from '../../modules/dashboard';
-import { ListUserComponent} from '../../modules/user/index';
+import { ListVehiclesComponent} from '../../modules/vehicle/index';
 
 const routes: Routes = [ 
 
   {path: 'dashboard', component: FleetManagerComponent},
+
+  {path: 'vehicle', component: ListVehiclesComponent},
   {path: '**', component: FleetManagerComponent},
-  {path: 'user/list', component: ListUserComponent}
   
 ];
 

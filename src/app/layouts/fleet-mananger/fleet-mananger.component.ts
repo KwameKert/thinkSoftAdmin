@@ -20,7 +20,7 @@ export class FleetManangerComponent implements OnInit {
   menuLinks: Array<object> = [
     {name: 'dashboard',url: '/admin/dashboard', icon: 'home'},
     {name: 'Orders', url: 'election/list',  icon: 'shopping_basket'},
-    {name: 'Vehicle', url: 'category/list', icon: 'directions_car'},
+    {name: 'Vehicle', url: '/fleet_manager/vehicle', icon: 'directions_car'},
     {name: 'Riders', url: 'position/list', icon: 'motorcycle'}
   ];
 
