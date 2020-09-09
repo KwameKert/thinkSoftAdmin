@@ -7,12 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() links: Array<object>;
+  @Input() data: any;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.links)
+  //  console.log(this.links)
   }
 
 

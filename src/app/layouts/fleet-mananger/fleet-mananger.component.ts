@@ -22,7 +22,13 @@ export class FleetManangerComponent implements OnInit {
     {name: 'Orders', url: 'election/list',  icon: 'shopping_basket'},
     {name: 'Vehicle', url: 'category/list', icon: 'directions_car'},
     {name: 'Riders', url: 'position/list', icon: 'motorcycle'}
-  ]
+  ];
+
+  data: any = {
+    links :this.menuLinks,
+    name : 'Fleet Manager',
+    image : '../../../assets/images/fleet_manager.png'
+  }
 
 
 }
