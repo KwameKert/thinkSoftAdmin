@@ -6,7 +6,7 @@
 
     <mat-card-content>
 
-      <button mat-raised-button color="primary" class="float-right mb-1"> <mat-icon>add</mat-icon> New Vehicle</button>
+      <button mat-raised-button color="primary" class="float-right mb-1" (click)="addVehicle()"> <mat-icon>add</mat-icon> New Vehicle</button>
 
      
 
@@ -82,7 +82,7 @@
                       <span>View Vehicle </span>
                     </button>
 
-                    <button mat-menu-item (click)="editVehicle(element.id)">
+                    <button mat-menu-item (click)="editVehicle(element)">
                       <mat-icon>edit</mat-icon>
                       <span>Edit Vehicle </span>
                     </button>

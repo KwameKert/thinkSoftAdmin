@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteItemComponent } from '../../../shared/components/delete-item/delete-item.component';
 import { ViewVehicleComponent } from '../view-vehicle/view-vehicle.component';
 import { VehicleService } from '../../vehicle.service';
+import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
+import { EditVehicleComponent } from '../edit-vehicle/edit-vehicle.component';
 
 
 @Component({
@@ -78,15 +80,50 @@ export class ListVehiclesComponent implements OnInit {
     });
   }
 
-  editVehicle(id: Number){
+  editVehicle(vehicle){
+    const dialogRef = this.dialog.open(EditVehicleComponent, {
+      width: '820px',
+      height: '520px',
+      data: vehicle
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.event){
+        this._toastr.success("Vehicle added successfully", "Success  😊", {  timeOut:2000});
+       this.loadVehicles()
+      }
+    }, error=>{
+      this._toastr.error("Oops an error. 🥺","",{
+        timeOut:2000
+      })
+    });
+  }
+
+ 
+  addVehicle(){
+
+    const dialogRef = this.dialog.open(AddVehicleComponent, {
+      width: '820px',
+      height: '520px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.event){
+        this._toastr.success("Vehicle added successfully", "Success  😊", {  timeOut:2000});
+       this.loadVehicles()
+      }
+    }, error=>{
+      this._toastr.error("Oops an error. 🥺","",{
+        timeOut:2000
+      })
+    });
 
   }
 
   viewVehicle(vehicle){
-
     const dialogRef = this.dialog.open(ViewVehicleComponent, {
-      width: '700px',
-      height: '320px',
+      width: '800px',
+      height: '420px',
       data: vehicle
     });
 

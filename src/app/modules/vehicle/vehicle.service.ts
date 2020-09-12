@@ -23,5 +23,13 @@ export class VehicleService {
     return this._httpClient.get<ApiResponse<any>>(`${this._baseUrl}/vehicle/me/live`);
   }
 
+  public getVehicle(id: string): Observable<ApiResponse<any>>{
+    return this._httpClient.get<ApiResponse<any>>(`${this._baseUrl}/vehicle/${id}`);
+  }
+
+  public updateVehicle(id: string, data: any): Observable<ApiResponse<any>>{
+    return this._httpClient.patch<ApiResponse<any>>(`${this._baseUrl}/vehicle/${id}`, data);
+  }
+
 
 }

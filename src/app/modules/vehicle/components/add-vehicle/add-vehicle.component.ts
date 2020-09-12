@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { VehicleService } from '../../vehicle.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -7,9 +12,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddVehicleComponent implements OnInit {
 
-  constructor() { }
+  vehicleForm: FormGroup;
+  years: Array<object> = [
+    {value:2005 , viewValue: '2005'},
+    {value:2006 , viewValue: '2006'},
+    {value:2007 , viewValue: '2007'},
+    {value:2008 , viewValue: '2008'},
+    {value:2009 , viewValue: '2009'},
+    {value:2010 , viewValue: '2010'},
+    {value:2011 , viewValue: '2011'},
+    {value:2012 , viewValue: '2012'},
+    {value:2013 , viewValue: '2013'},
+    {value:2014 , viewValue: '2014'},
+    {value:2015 , viewValue: '2015'},
+    {value:2016 , viewValue: '2016'},
+    {value:2017 , viewValue: '2017'},
+    {value:2018 , viewValue: '2018'},
+    {value:2019 , viewValue: '2019'},
+  ]
+
+  fuels: Array<object> = [
+    {value:'petrol' , viewValue: 'Petrol'},
+    {value:'disel' , viewValue: 'Disel'},
+    {value:'kerosene' , viewValue: 'Kerosene'},
+  ]
+  
+  constructor(private _fb: FormBuilder, private _toastr: ToastrService,  private ngxService: NgxUiLoaderService, private _vehicleService: VehicleService,  public dialogRef: MatDialogRef<AddVehicleComponent>) { }
 
   ngOnInit(): void {
+
+    this.loadVehicleForm();
+  }
+
+  loadVehicleForm(){
+    this.vehicleForm = this._fb.group({
+      model: new FormControl('', Validators.required),
+      brand: new FormControl('', Validators.required),
+      capacity: new FormControl('', Validators.required),
+      mileage: new FormControl('', Validators.required),
+      year: new FormControl('', Validators.required),
+      color: new FormControl('', Validators.required),
+      fuelType: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      description: new FormControl(''),
+    })
+  }
+
+  saveVehicle(){
+    this.ngxService.start()
+
+    this._vehicleService.addVehicle(this.vehicleForm.value).subscribe(data=>{
+        console.log(data);
+        this.dialogRef.close({event:true});
+
+    }, error =>{
+
+    }).add(this.ngxService.stop()
+    )
+
   }
 
 }
