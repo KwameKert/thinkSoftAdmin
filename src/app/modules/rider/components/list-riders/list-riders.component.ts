@@ -85,13 +85,13 @@ export class ListRidersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
-        this._toastr.success("Rider added successfully", "Success  😊", {  timeOut:2000});
+      //  this._toastr.success("Rider added successfully", "Success  😊", {  timeOut:2000});
        this.loadRiders()
       }
     }, error=>{
-      this._toastr.error("Oops an error. 🥺","",{
-        timeOut:2000
-      })
+      // this._toastr.error("Oops an error. 🥺","",{
+      //   timeOut:2000
+      // })
     });
   }
 
@@ -116,11 +116,11 @@ export class ListRidersComponent implements OnInit {
 
   }
 
-  viewRider(Rider){
+  viewRider(data: any){
     const dialogRef = this.dialog.open(ViewRiderComponent, {
       width: '800px',
       height: '420px',
-      data: Rider
+      data
     });
 
     dialogRef.afterClosed().subscribe(result => {

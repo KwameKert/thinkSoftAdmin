@@ -1,1 +1,45 @@
-<p>view-rider works!</p>
+
+<h3 mat-dialog-title>View Vehicle 
+    <span *ngIf="data.status == 'inactive'" class="badge badge-warning"> {{data.status}} </span> 
+    <span *ngIf="data.status == 'active'" class="badge badge-success"> {{data.status}} </span>
+</h3>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="container">
+    <div  class="row justify-content-center pt-4 ">
+
+        <div class="col-3">
+            <ngx-avatar name="{{data.firstName}} {{data.lastName}}" size="100" [round]="false" ></ngx-avatar>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-6">
+                    <p>Full Name:   {{data.firstName | titlecase}}  {{data.lastName | titlecase}}</p>
+                    <p>Address:   {{data.address | titlecase }}</p>
+                    <p>email:  {{data.email }} </p>
+                    <p>phone: {{data.phone }} </p>
+                </div>
+                <div class="col-6">
+
+            <p>Date of birth:   {{data.dob | date:"mediumDate"}}</p>
+            <p>Age:   {{age }}</p>
+            <p>Created On: {{data.createdAt | dateAgo }}</p>
+            <p *ngIf="data.vehicle"> Vehicle:  {{ data.vehicle.brand | titlecase}} - {{ data.vehicle.model | titlecase}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p>Description: {{data.description }}</p>
+                </div>
+            </div>
+           
+        </div>
+ 
+    
+    </div>
+    
+</div>
+<div mat-dialog-actions class="float-right">
+    <button mat-button (click)="close()" class="float-right">Close</button>
+    
+  </div>

@@ -76,7 +76,7 @@
                         <mat-select  formControlName="status">
                           <mat-option>None</mat-option>
                           <mat-option value="active" >Active</mat-option>
-                          <mat-option value="active" >Inactive</mat-option>
+                          <mat-option value="inactive" >Inactive</mat-option>
                         </mat-select>
                       </mat-form-field>
         
@@ -84,12 +84,24 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
                       <mat-form-field appearance="outline" style="width: 90%;">
                         <mat-label>Description</mat-label>
                         <textarea matInput  formControlName="description" rows="2" cols="8"></textarea>
                       </mat-form-field>
                     </div>
+
+                    <div class="col-6">
+                        <mat-form-field appearance="outline"  >
+                          <mat-label>Vehicle</mat-label>
+                          <mat-select  formControlName="vehicle">
+                            <mat-option *ngFor="let vehicle  of vehicles" [value]="vehicle._id">
+                                {{vehicle.brand | titlecase}}-{{vehicle.model}} ({{vehicle.color}}) 
+                              </mat-option>
+                              <mat-option>None</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
                   </div>           
         </div>
     </div>

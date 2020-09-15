@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/models/ApiResponse';
 import { environment } from 'src/environments/environment';
 import { CrudService } from '../shared/service';
+import { Vehicle } from '../vehicle/vehicle.service';
 
 export interface Rider{
   _id ?:  string, 
@@ -16,7 +17,8 @@ export interface Rider{
   email: string,
   address: string,
   phone: string,
-  owner ?: string
+  company ?: string,
+  vehicle ?: Vehicle
 }
 
 @Injectable({

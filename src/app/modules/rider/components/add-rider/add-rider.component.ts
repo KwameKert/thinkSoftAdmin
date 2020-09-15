@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AddVehicleComponent } from 'src/app/modules/vehicle/components/add-vehicle/add-vehicle.component';
+import { VehicleService } from 'src/app/modules/vehicle/vehicle.service';
 import { RiderService } from '../../rider.service';
 
 @Component({
@@ -12,12 +13,14 @@ import { RiderService } from '../../rider.service';
 })
 export class AddRiderComponent implements OnInit {
 
+  vehicles: any;
   riderForm: FormGroup;
-  constructor(private _fb: FormBuilder,  private ngxService: NgxUiLoaderService, private _riderService: RiderService,  public dialogRef: MatDialogRef<AddVehicleComponent>) { }
+  constructor(private _fb: FormBuilder,  private ngxService: NgxUiLoaderService, private _riderService: RiderService,  public dialogRef: MatDialogRef<AddVehicleComponent>, private _vehicleService: VehicleService, ) { }
 
   ngOnInit(): void {
 
     this.loadRiderForm();
+    this.loadActiveVehicles();
   }
 
   loadRiderForm(){
@@ -30,7 +33,8 @@ export class AddRiderComponent implements OnInit {
       phone: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
-      description: ''
+      description: '',
+      vehicle: ''
     })
   }
 
@@ -47,18 +51,21 @@ export class AddRiderComponent implements OnInit {
     }finally{
       this.ngxService.stop();
     }
-    
-
-    // this._vehicleService.addVehicle(this.vehicleForm.value).subscribe(data=>{
-    //     console.log(data);
-    //     this.dialogRef.close({event:true});
-
-    // }, error =>{
-
-    // }).add(this.ngxService.stop()
-    // )
 
   }
 
+  async loadActiveVehicles(){
+    try{
+      this.ngxService.start()
+
+      let resObject = await this._vehicleService.query({status: "active"});
+      this.vehicles = resObject.data;
+
+    }catch(error){
+      console.error(error);
+    }finally{
+      this.ngxService.stop();
+    }
+  }
 
 }
