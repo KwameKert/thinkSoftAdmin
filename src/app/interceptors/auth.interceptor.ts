@@ -69,10 +69,10 @@ import { ToastrService } from 'ngx-toastr';
                 this._toastr.error("You are not authorized to perform this action. Contact your administrator.")
                 break;
               case 400: //Bad Request
-                this._toastr.error(err)
+                this._toastr.info(err)
                 break;
               case 404: //Not Found
-                this._toastr.error("Resource doesn't exist.")
+                this._toastr.info("Resource doesn't exist.")
                 break;
               case 500:  //Internal Server Error
                 this._toastr.error(err.error)

@@ -21,7 +21,7 @@ export class FleetManangerComponent implements OnInit {
     {name: 'dashboard',url: '/admin/dashboard', icon: 'home'},
     {name: 'Orders', url: 'election/list',  icon: 'shopping_basket'},
     {name: 'Vehicle', url: '/fleet_manager/vehicle', icon: 'directions_car'},
-    {name: 'Riders', url: 'position/list', icon: 'motorcycle'}
+    {name: 'Riders', url: '/fleet_manager/rider', icon: 'motorcycle'}
   ];
 
   data: any = {

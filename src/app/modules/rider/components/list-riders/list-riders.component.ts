@@ -17,9 +17,10 @@ import { ViewRiderComponent } from '../view-rider/view-rider.component';
 })
 export class ListRidersComponent implements OnInit {
 
-  displayedColumns: Array<string> = ['pic','model', 'brand', 'status','mileage', 'created_on', 'actions'];
+  displayedColumns: Array<string> = ['pic','full name', 'address', 'status', 'phone','created_on', 'actions'];
   isLoading: boolean = true;
   dataSource: any = null;
+  isEmpty: boolean = false;
   
   constructor(private _riderService: RiderService,  public dialog: MatDialog, private _snackBar: MatSnackBar, private _router: Router, private _toastr: ToastrService) { }
 
@@ -32,21 +33,19 @@ export class ListRidersComponent implements OnInit {
   }
 
 
-  loadRiders(){
-    this._riderService.listRiders().subscribe((data)=>{
-      if(data.data == null){
-        this._toastr.info("No Riders found. 🥺","",{
-          timeOut:2000
-        })
-      }else{
-        this.dataSource = data.data;
+  async loadRiders(){
+    try{
+      this.isLoading = true;
+      let riders = await this._riderService.query({status: "live"});
+        this.dataSource = riders.data;
         this.dataSource.paginator = this.paginator;
-      }
       
+    }catch(error){
+      this.isEmpty = true;
+    }finally{
       this.isLoading = false;
-    }, error=>{
-
-    })
+    }
+  
   }
 
 
@@ -65,14 +64,14 @@ export class ListRidersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
         
-        this._snackBar.open("User Deleted 🙂  ", "", {
-          duration: 2000,
-        });
+        // this._snackBar.open("User Deleted 🙂  ", "", {
+        //   duration: 2000,
+        // });
       }else{
 
-        this._toastr.error("Oops an error. 🥺","",{
-          timeOut:2000
-        })
+        // this._toastr.error("Oops an error. 🥺","",{
+        //   timeOut:2000
+        // })
       }
     });
   }
@@ -106,13 +105,13 @@ export class ListRidersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
-        this._toastr.success("Rider added successfully", "Success  😊", {  timeOut:2000});
+       // this._toastr.success("Rider added successfully", "Success  😊", {  timeOut:2000});
        this.loadRiders()
       }
     }, error=>{
-      this._toastr.error("Oops an error. 🥺","",{
-        timeOut:2000
-      })
+      // this._toastr.error("Oops an error. 🥺","",{
+      //   timeOut:2000
+      // })
     });
 
   }
@@ -126,9 +125,9 @@ export class ListRidersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     }, error=>{
-      this._toastr.error("Oops an error. 🥺","",{
-        timeOut:2000
-      })
+      // this._toastr.error("Oops an error. 🥺","",{
+      //   timeOut:2000
+      // })
     });
 
   }
