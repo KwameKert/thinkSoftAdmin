@@ -19,9 +19,6 @@ export class AuthService {
    public user: Observable<User>;
    private response: any;
 
-  //  private loggedInStatus = localStorage.getItem("status");
-  //  private authority = localStorage.getItem("role");
-
     constructor(
         private router: Router,
         private _httpClient: HttpClient
@@ -37,8 +34,6 @@ export class AuthService {
   login(data: object) {
     return this._httpClient.post<ApiResponse<any>>(`${this._baseUrl}/auth/admin/login`, data)
         .pipe(map(data => {
-         
-              // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(data.data));
             this.userSubject.next(data.data);
             return data.data;
@@ -50,6 +45,9 @@ export class AuthService {
   loginUser(data: any ): Observable<any>{
     return this._httpClient.post(`${this._baseUrl}/auth/login`, data);
   }
+
+  isLoggedIn() { return !!this.user }
+
 
   setUserDetails(authData: any){
     localStorage.setItem("propToken", authData.token);

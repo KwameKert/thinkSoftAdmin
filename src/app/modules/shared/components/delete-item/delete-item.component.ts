@@ -10,7 +10,7 @@ export class DeleteItemComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteItemComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private _crudService: CrudService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private _crudService: CrudService<any>) { }
 
   ngOnInit() {
   
@@ -22,20 +22,38 @@ export class DeleteItemComponent implements OnInit {
   }
 
 
-  delete(){
-    this._crudService.deleteItem(this.data).subscribe(data=>{
-      let response: any = data;
+  async delete(){
 
-      let evt = {
-        data: response.data,
-        event: true
-
+    try{
+      let {id, model} = this.data;
+      let resObj = await  this._crudService.deleteItem(id, model);
+      if(resObj){
+        let evt = {
+          data: resObj.data,
+          event: true
+        }
+        this.dialogRef.close(evt);
       }
-      this.dialogRef.close(evt);
-    }, error=>{
-      console.warn(error);
-      this.dialogRef.close({event:false});
-    })
+  
+    }catch(error){
+
+        console.warn(error);
+        this.dialogRef.close({event:false});
+    }
+  
+    // this._crudService.deleteItem(id, model).subscribe(data=>{
+    //   let response: any = data;
+
+    //   let evt = {
+    //     data: response.data,
+    //     event: true
+
+    //   }
+    //   this.dialogRef.close(evt);
+    // }, error=>{
+    //   console.warn(error);
+    //   this.dialogRef.close({event:false});
+    // })
 
   }
 }

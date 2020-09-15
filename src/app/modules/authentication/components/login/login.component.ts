@@ -53,9 +53,7 @@ loginUser(){
       
     },
       error => {
-       
-        this._toastr.error("Invalid credentials", "Oops ", {  timeOut:2000});
-        console.error("Opops an error occured")
+        console.error(error)
       }).add(()=>{
         this.isLoading  = false;
       });

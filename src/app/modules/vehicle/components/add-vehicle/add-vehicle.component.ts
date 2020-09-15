@@ -58,17 +58,29 @@ export class AddVehicleComponent implements OnInit {
     })
   }
 
-  saveVehicle(){
-    this.ngxService.start()
+ async saveVehicle(){
 
-    this._vehicleService.addVehicle(this.vehicleForm.value).subscribe(data=>{
-        console.log(data);
-        this.dialogRef.close({event:true});
+    try{
+      this.ngxService.start()
 
-    }, error =>{
+      let resObject = await this._vehicleService.addItem(this.vehicleForm.value);
+      this.dialogRef.close({event:true});
 
-    }).add(this.ngxService.stop()
-    )
+    }catch(error){
+      console.error(error);
+    }finally{
+      this.ngxService.stop();
+    }
+    
+
+    // this._vehicleService.addVehicle(this.vehicleForm.value).subscribe(data=>{
+    //     console.log(data);
+    //     this.dialogRef.close({event:true});
+
+    // }, error =>{
+
+    // }).add(this.ngxService.stop()
+    // )
 
   }
 

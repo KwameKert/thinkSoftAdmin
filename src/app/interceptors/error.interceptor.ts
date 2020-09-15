@@ -19,23 +19,42 @@ intercept(
          
             catchError((err: any) => {
                 if(err instanceof HttpErrorResponse) {
-                    
-                    if(err.status == 403){
-                        this._toastr.error("Please authenticate", "Oops 🥺", {  timeOut:4000});
-                        this._router.navigate(['/login']);
-                        this._authService.logout();
+                    let status = err.status;
 
-                    }else if(err.status == 400){
-                        this._toastr.info( err.error.message, "Oops 🥺", {  timeOut:4000});
-                        
-                    }else{
+                    switch(status){
+                        case 400:
+                             this._toastr.error(err.error.message, "Oops 🥺",{  timeOut:4000});
+                             break;
+                        case 403:
+                            this._toastr.error("Please authenticate", "Oops 🥺",{  timeOut:4000});
+                            this._router.navigate(['/login']);
+                            this._authService.logout();  
+                            break;
 
-                        const error = err.error.message || err.statusText;
-                        console.log(error)
-                      this._toastr.error(error, "Oops 🥺", {  timeOut:4000});
-                       //return throwError(error); 
-                       
+                        default:
+                            const error = err.error.message || err.statusText;
+                            console.log(error)
+                            this._toastr.error(error, "Oops 🥺", {  timeOut:4000})
+
+
                     }
+
+                    // if(err.status == 403){
+                    //     this._toastr.error("Please authenticate", "Oops 🥺", {  timeOut:4000});
+                    //     this._router.navigate(['/login']);
+                    //     this._authService.logout();
+
+                    // }else if(err.status == 400){
+                    //     this._toastr.info( err.error.message, "Oops 🥺", {  timeOut:4000});
+                        
+                    // }else{
+
+                    //     const error = err.error.message || err.statusText;
+                    //     console.log(error)
+                    //   this._toastr.error(error, "Oops 🥺", {  timeOut:4000});
+                    //    //return throwError(error); 
+                       
+                    // }
                 }
                 next
                 return of(err);

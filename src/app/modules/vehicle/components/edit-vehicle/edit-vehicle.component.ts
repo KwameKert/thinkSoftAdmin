@@ -49,6 +49,7 @@ export class EditVehicleComponent implements OnInit {
 
   editForm(): void {
     this.vehicleForm.patchValue({
+    _id: this.data._id,
      model: this.data.model,
      brand: this.data.brand,
      capacity: this.data.capacity,
@@ -65,6 +66,7 @@ export class EditVehicleComponent implements OnInit {
 
   loadVehicleForm(){
     this.vehicleForm = this._fb.group({
+      _id: '',
       model: new FormControl('', Validators.required),
       brand: new FormControl('', Validators.required),
       capacity: new FormControl('', Validators.required),
@@ -77,17 +79,19 @@ export class EditVehicleComponent implements OnInit {
     })
   }
 
-  saveVehicle(){
-    this.ngxService.start()
+async  saveVehicle(){
+    
+    try{
+      this.ngxService.start()
 
-    this._vehicleService.updateVehicle(this.data._id, this.vehicleForm.value).subscribe(data=>{
-        console.log(data);
-        this.dialogRef.close({event:true});
+      let resObject = await this._vehicleService.updateItem(this.vehicleForm.value);
+      this.dialogRef.close({event:true});
 
-    }, error =>{
-
-    }).add(this.ngxService.stop()
-    )
+    }catch(error){
+      console.error(error);
+    }finally{
+      this.ngxService.stop();
+    }
 
   }
 

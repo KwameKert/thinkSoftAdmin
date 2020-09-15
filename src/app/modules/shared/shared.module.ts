@@ -25,6 +25,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { AvatarModule } from 'ngx-avatar';
+import { ToastrModule } from 'ngx-toastr';
+//import { CrudService } from './service/crud.service';
 
 
 @NgModule({
@@ -54,11 +56,14 @@ import { AvatarModule } from 'ngx-avatar';
     MatFormFieldModule,
     MatStepperModule,
     MatNativeDateModule,
-    AvatarModule
+    AvatarModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+  }), 
     
   ],
   providers: [  
-  //  MatDatepickerModule,  
   ],
   exports: [
     MatTableModule,

@@ -4,6 +4,7 @@ import { CrudService } from '../../../shared/service/crud.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -18,7 +19,7 @@ export class EditUserComponent implements OnInit {
 
   @Output() updatedUser: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private _fb: FormBuilder, private _crudService: CrudService, private _toastr: ToastrService,  private ngxService: NgxUiLoaderService, private _route: ActivatedRoute) { }
+  constructor(private _fb: FormBuilder, private _toastr: ToastrService,  private ngxService: NgxUiLoaderService,private _userService: UserService) { }
 
   ngOnInit(): void {
     
@@ -37,47 +38,45 @@ export class EditUserComponent implements OnInit {
   }
 
 
-  addUser(){
+  async addUser(){
 
-    this.ngxService.start()
-    this._crudService.updateItem({data: this.userForm.value, module:`auth/admin/update/${this.userId}`}).subscribe(data=>{
-     this.userForm.reset();
-      this._toastr.success(data.message, "Success  😊", {  timeOut:2000});
+    try{
+      this.ngxService.start()
+      let resObj = await this._userService.addItem(this.userForm.value);
+      if(resObj){
+        this.updatedUser.emit(true)
+      }else{
+        console.error("oops an error here")
+      }
+    }catch(error){
 
-      this.updatedUser.emit(true)
-    }, error=>{
-
-      this._toastr.error("Please authenticate", "Oops 🥺", {  timeOut:4000});
-      console.error(error)
-    })
-
-    this.ngxService.stop()
+    }finally{
+      this.ngxService.stop()
+    }
 
   }
 
 
 
 
-  findUser(id){
+ async findUser(id){
 
     if(id){
-      this._crudService.fetchItem({id: id, module: 'user/admin'}).subscribe(data=>{
-        let result: any= data.data;
+      let resObj = await this._userService.fetchItem(id);
+      let result = resObj.data
+      if(resObj){
         this.userForm.patchValue({
           username: result.username,
           email: result.email,
           role: result.role,
-          status: result.stat,
-          id: result.id,
+          status: result.status,
+          id: result._id,
         })
-        
-  
-      }, error=>{
-        console.error(error)
-      })
+      }
+    
+    }else{
+      console.log("no _id found")
     }
-
-
   }
 
   ngOnChanges(changes: SimpleChanges) {

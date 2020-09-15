@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent ,SidebarComponent,FooterComponent} from './layouts';
@@ -19,7 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
-import { ErrorInterceptor, TokenInterceptor} from './interceptors';
+import { AuthInterceptor} from './interceptors';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { FleetManangerComponent } from './layouts/fleet-mananger/fleet-mananger.component';
 import { SuperAdminComponent } from './layouts/super-admin/super-admin.component';
@@ -52,12 +51,14 @@ import { SuperAdminComponent } from './layouts/super-admin/super-admin.component
     ChartsModule,
     NgxUiLoaderModule,
     MatSidenavModule,
-    ToastrModule.forRoot(),   
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+  }),   
   ],
   providers: [
     DatePipe, 
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

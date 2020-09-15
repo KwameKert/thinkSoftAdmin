@@ -23,7 +23,7 @@ export class ListVehiclesComponent implements OnInit {
   isLoading: boolean = true;
   dataSource: any = null;
   
-  constructor(private _crudService: CrudService, private _vehicleService: VehicleService,  public dialog: MatDialog, private _snackBar: MatSnackBar, private _router: Router, private _toastr: ToastrService) { }
+  constructor( private _vehicleService: VehicleService,  public dialog: MatDialog, private _snackBar: MatSnackBar, private _router: Router, private _toastr: ToastrService) { }
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -34,21 +34,36 @@ export class ListVehiclesComponent implements OnInit {
   }
 
 
-  loadVehicles(){
-    this._vehicleService.listVehicles().subscribe((data)=>{
-      if(data.data == null){
-        this._toastr.info("No vehicles found. 🥺","",{
-          timeOut:2000
-        })
-      }else{
-        this.dataSource = data.data;
-        this.dataSource.paginator = this.paginator;
-      }
-      
-      this.isLoading = false;
-    }, error=>{
+ async loadVehicles(){
 
-    })
+    try{
+      this.isLoading = true;
+      let resObj = await this._vehicleService.query({status: "live"});
+      this.dataSource = resObj.data;
+      console.log(resObj.data)
+      this.dataSource.paginator = this.paginator;
+      this.isLoading = false;
+
+    }catch(error){
+      console.error(error)
+    }
+ 
+
+
+    // this._vehicleService.listVehicles().subscribe((data)=>{
+    //   if(data.data == null){
+    //     this._toastr.info("No vehicles found. 🥺","",{
+    //       timeOut:2000
+    //     })
+    //   }else{
+    //     this.dataSource = data.data;
+    //     this.dataSource.paginator = this.paginator;
+    //   }
+      
+    //   this.isLoading = false;
+    // }, error=>{
+
+    // })
   }
 
 
@@ -66,16 +81,15 @@ export class ListVehiclesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
-        this._snackBar.open("User Deleted 🙂  ", "", {
-          duration: 2000,
-        });
-      // this.loadAllUsers()
-
+        
+        // this._snackBar.open("User Deleted 🙂  ", "", {
+        //   duration: 2000,
+        // });
       }else{
 
-        this._toastr.error("Oops an error. 🥺","",{
-          timeOut:2000
-        })
+        // this._toastr.error("Oops an error. 🥺","",{
+        //   timeOut:2000
+        // })
       }
     });
   }
@@ -89,7 +103,6 @@ export class ListVehiclesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
-        this._toastr.success("Vehicle added successfully", "Success  😊", {  timeOut:2000});
        this.loadVehicles()
       }
     }, error=>{
@@ -109,13 +122,13 @@ export class ListVehiclesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
-        this._toastr.success("Vehicle added successfully", "Success  😊", {  timeOut:2000});
+      //  this._toastr.success("Vehicle added successfully", "Success  😊", {  timeOut:2000});
        this.loadVehicles()
       }
     }, error=>{
-      this._toastr.error("Oops an error. 🥺","",{
-        timeOut:2000
-      })
+      // this._toastr.error("Oops an error. 🥺","",{
+      //   timeOut:2000
+     // })
     });
 
   }

@@ -1,60 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment} from '../../../../environments/environment';
-import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/models/ApiResponse';
 
 
-export interface User {
-  fullName: string;
-  username: string;
-  role: string;
-  email: string;
-}
 
-
-
-@Injectable({
-  providedIn: 'root'
-})
-export class CrudService {
+export class CrudService<T> {
 
   private _baseUrl :String = environment.api_host;
-  constructor(private _httpClient: HttpClient) { }
+  constructor(public _httpClient: HttpClient, public model: string) { }
 
 
-
-
-
-  deleteItem({id, module}){
-    return this._httpClient.delete(`${this._baseUrl}/${module}/${id}`);
+  deleteItem(id: string, module: string){
+    return this._httpClient.delete<ApiResponse<any>>(`${this._baseUrl}/${module}/${id}`).toPromise();
    }
 
 
+   query(filter: any) {
+    return this._httpClient.get<ApiResponse<T[]>>(`${this._baseUrl}/${this.model}/query?${this.getQueryString(filter)}`).toPromise()
+}
+
    
-  public fetchItem({id, module}): Observable<ApiResponse<any>>{
-    return this._httpClient.get<ApiResponse<any>>(`${this._baseUrl}/${module}/${id}`)
+  public fetchItem(id: string){
+    return this._httpClient.get<ApiResponse<T>>(`${this._baseUrl}/${this.model}/${id}`).toPromise();
   }
 
 
-  public fetchAll(module: any):  Observable<ApiResponse<any>> {
-    return this._httpClient.get<ApiResponse<any>>(`${this._baseUrl}/${module}/`)
+  public fetchAll() {
+    return this._httpClient.get<ApiResponse<T[]>>(`${this._baseUrl}/${this.model}/`).toPromise();
+  }
+
+  public addItem(data: T){
+    return this._httpClient.post<ApiResponse<T>>(`${this._baseUrl}/${this.model}/`, data).toPromise();
   }
 
 
-
-
-  public addItem(data, module): Observable<ApiResponse<any>>{
-    return this._httpClient.post<ApiResponse<any>>(`${this._baseUrl}/${module}/`, data);
+  public updateItem(data: T){
+    return this._httpClient.patch<ApiResponse<T>>(`${this._baseUrl}/${this.model}`, data).toPromise();
   }
 
+  protected getQueryString(filter: object) {
+    let queryString = Object.keys(filter).map((key) => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(filter[key])
+    }).join('&');
 
-  public updateItem({data, module}): Observable<ApiResponse<any>>{
-    return this._httpClient.patch<ApiResponse<any>>(`${this._baseUrl}/${module}`, data);
-  }
-
-
-
+    return queryString
+}
 
 
 

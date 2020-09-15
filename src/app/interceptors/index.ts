@@ -1,2 +1,2 @@
 export {ErrorInterceptor} from './error.interceptor';
-export {TokenInterceptor} from './token.interceptor';
+export {AuthInterceptor} from './auth.interceptor';

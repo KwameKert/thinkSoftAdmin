@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteItemComponent } from '../../../shared/components/delete-item/delete-item.component';
 import { ViewUserComponent } from '../view-user/view-user.component';
+import { UserService } from '../../user.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class ListUserComponent implements OnInit {
     {def: 'actions', slideShow: false}
   ];
 
-  constructor(private _crudService: CrudService, public dialog: MatDialog, private _snackBar: MatSnackBar, private _router: Router, private _toastr: ToastrService) { }
+  constructor(private _userService: UserService, public dialog: MatDialog, private _snackBar: MatSnackBar, private _router: Router, private _toastr: ToastrService) { }
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -54,24 +55,42 @@ export class ListUserComponent implements OnInit {
   }
 
 
-  loadAllUsers(){
-    this._crudService.fetchAll("/user/admin/list").subscribe(data=>{
+async  loadAllUsers(){
+
+  try{
+    this.isLoading = true;
+    let resObject =  await this._userService.fetchAllUsers();
+
+    if(resObject){
+      this.dataSource = resObject.data;
+      this.dataSource.paginator = this.paginator;
+    }
+    
+  }catch(error){
+    console.error(error)
+  }finally{
+    this.isLoading = false;
+  }
+
+    
+
+    // this._crudService.fetchAll("/user/admin/list").subscribe(data=>{
       
-      if(data.data == null){
-        this._toastr.info("No users found. 🥺","",{
-          timeOut:2000
-        })
-      }else{
-        this.dataSource = data.data;
-        this.dataSource.paginator = this.paginator;
-      }
+    //   if(data.data == null){
+    //     this._toastr.info("No users found. 🥺","",{
+    //       timeOut:2000
+    //     })
+    //   }else{
+    //     this.dataSource = data.data;
+    //     this.dataSource.paginator = this.paginator;
+    //   }
       
-      this.isLoading = false;
-    }, error=>{
-      this._toastr.error("Oops an error. 🥺","",{
-        timeOut:2000
-      })
-    })
+    //   this.isLoading = false;
+    // }, error=>{
+    //   this._toastr.error("Oops an error. 🥺","",{
+    //     timeOut:2000
+    //   })
+    // })
   }
 
   getCollumnDefinitions(){
@@ -119,17 +138,13 @@ export class ListUserComponent implements OnInit {
   }
 
 
-  deleteUser(id: Number){
-    let data = {
-      module: 'users',
-      id
-    }
+  deleteUser(id: string){
+
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       width: '550px',
       height: '180px',
-      data: data
+      data: {id, model: 'user'}
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if(result.event){
         this._snackBar.open("User Deleted 🙂  ", "", {
