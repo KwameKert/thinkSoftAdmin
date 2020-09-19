@@ -22,6 +22,7 @@ import { AuthInterceptor} from './interceptors';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { FleetManangerComponent } from './layouts/fleet-mananger/fleet-mananger.component';
 import { SuperAdminComponent } from './layouts/super-admin/super-admin.component';
+import { PageTitleComponent } from './layouts/components/page-title/page-title.component';
 //import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SuperAdminComponent } from './layouts/super-admin/super-admin.component
     DefaultComponent,
     FleetManangerComponent,
     SuperAdminComponent,
+    PageTitleComponent,
 
   ],
   imports: [

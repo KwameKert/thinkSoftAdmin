@@ -1,55 +1,62 @@
-<mat-toolbar color="primary" class="navbar">
-    
-        <mat-toolbar-row class="navbar-inner">
-            <div fxFlex fxLayout="row" fxLayoutAlign="flex-start">
-                <ul fxLayout="row" fxLayoutGap="90px">
-                   
+<div class="topbar-main">
+    <div class="container-fluid">
 
-                    <li  class="nav-icon">
-                        <a href="" routerLink="/login" style="color:white; text-decoration: none;"><span>Safe Hands</span></a>
-                    </li>
-                    <li>
-                        <button mat-icon-button (click)="toggleSideBar()" >
-                            <mat-icon >menu</mat-icon>
-                        </button>
-                    </li>
-                    </ul>
-        
-            </div>
-            
-    
-            <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" >
-                    <ul fxLayout="row" fxLayoutGap="20px">
-                        <!-- <li>
-                            <button mat-icon-button [matMenuTriggerFor]="setting">
-                                <mat-icon>settings</mat-icon>
-                            </button>
+        <div class="logo">
+            <a routerLink="/admin/dashboard" class="logo">
+               ThinkSopht Labs
+            </a>
 
-                            <mat-menu #setting="matMenu">
-                                <button mat-menu-item (click)="navigate('/admin/user/list')">
-                                    <mat-icon>supervised_user_circle</mat-icon> Users
-                                </button>
-                            </mat-menu>
-                        </li> -->
-    
-                        <li>
-                            <button mat-icon-button>
-                                <mat-icon>help_outline</mat-icon>
-                            </button>
-                        </li>
-    
-                        <li>
-                            <button mat-button [matMenuTriggerFor]="menu">
-                                <mat-icon>person</mat-icon>
-                            </button>
-                            <mat-menu #menu="matMenu">
-                                <button mat-menu-item (click)="logoutUser()">
-                                    <mat-icon>exit_to_app</mat-icon> Sign Out
-                                </button>
-                            </mat-menu>
-                        </li>
-                    </ul>
-            </div>
-        </mat-toolbar-row>
-  
-</mat-toolbar>
+        </div>
+        <!-- End Logo container-->
+
+
+        <div class="menu-extras topbar-custom">
+
+            <ul class="list-inline float-right mb-0">
+
+                <li class="menu-item list-inline-item">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle nav-link">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </li>
+
+                <li class="list-inline-item dropdown notification-list">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="false" aria-expanded="false">
+                       <div class="profile-link">
+                        <img src="/assets/images/avatar.jpg" alt="user" class="rounded-circle"> Administrator <i class="md md-expand-more"></i>
+                       </div>
+                      
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                        <!-- item-->
+                        <span *ngFor="let link of profileLinks">
+                            <a [routerLink]="[link.url]" class="dropdown-item notify-item" (click)="updateTitle(link.name)" >
+                                <i [class]="link.icon"></i> <span>{{link.name}}</span>
+                            </a>
+                          
+                        </span>
+                        <a href="javascript:(void)" class="dropdown-item notify-item" (click)="logout()">
+                            <i ></i> <span>Logout</span>
+                        </a>
+                        
+
+                       
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <!-- end menu-extras -->
+
+        <div class="clearfix"></div>
+
+    </div> <!-- end container -->
+</div>
+

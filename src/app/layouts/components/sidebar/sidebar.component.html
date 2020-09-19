@@ -1,7 +1,6 @@
-<mat-nav-list>
+<!-- <mat-nav-list>
     <div class="row " >
         <div class="col-md-6 offset-md-3">
-            <!-- <img [src]="../../../../assets/images/blue.jpg" alt="skuulba admin" class="rounded-circle " width="100px" height="100px"> -->
             <img [src]="data.image" alt="skuulba admin" class="rounded-circle " width="100px" height="100px">
             <b style="font-size: 15px;" >{{data.name}}</b>
         </div>
@@ -17,11 +16,29 @@
             <a  mat-list-item  routerLinkActive="is-active" [routerLink]="[link.url]"  >  <mat-icon class="sidebar-icon">{{link.icon}}</mat-icon  > {{ link.name | titlecase}}</a>
 
                 <mat-divider></mat-divider>
-
         </div>
-
     </div>
+</mat-nav-list> -->
 
 
-</mat-nav-list>
+
+<div class="navbar-custom">
+    <div class="container-fluid">
+        <div id="navigation">
+            <!-- Navigation Menu-->
+            <ul class="navigation-menu">
+                
+                <li  *ngFor="let link of data">
+                    <a  [routerLink]="[link.url]" (click)="updateTitle(link.name)" > 
+                        <i [class]="link.icon"></i>{{ link.name | titlecase}}
+                      </a>
+                </li>
+
+            </ul>
+            <!-- End navigation menu -->
+        </div> <!-- end #navigation -->
+    </div> <!-- end container -->
+</div> 
+
+
 

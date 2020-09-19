@@ -7,9 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuperAdminComponent implements OnInit {
 
+
+  pageTitle: string;
+  links: Array<object> = [
+    {name: "Dashboard", icon: "md md-dashboard", url: "/"},
+    {name: "Upload Data", icon: "fa fa-upload", url: "/"},
+    {name: "Predict Match", icon: "fa fa-bar-chart-o", url: "/"},
+    {name: "Custom Search", icon: "fa fa-search",url: "/"},
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeTitle(title: string){
+    this.pageTitle = title;
+  }
+
+  loadLinks(){
+
   }
 
 }

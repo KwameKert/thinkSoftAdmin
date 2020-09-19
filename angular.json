@@ -26,11 +26,20 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/icons.css",
+              "src/assets/css/style.css",
               "src/styles.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/waves.js",
+              "src/assets/js/jquery.slimscroll.js",
+              "src/assets/js/jquery.scrollTo.min.js",
+              "src/assets/js/jquery.core.js",
+              "src/assets/js/jquery.app.js",
               "./node_modules/chart.js/dist/Chart.min.js"
             ]
           },

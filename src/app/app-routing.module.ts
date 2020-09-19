@@ -3,6 +3,7 @@ import { RouterModule, Routes ,PreloadAllModules} from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import {DefaultComponent} from './layouts/default/default.component';
 import { FleetManangerComponent } from './layouts/fleet-mananger/fleet-mananger.component';
+import { SuperAdminComponent } from './layouts/super-admin/super-admin.component';
 
 const routes: Routes= [
 {
@@ -14,7 +15,7 @@ const routes: Routes= [
 
 {
   path:'admin', 
-  component: DefaultComponent,
+  component: SuperAdminComponent,
   loadChildren: () => import('./views/admin/admin.module')
                      .then(m => m.AdminModule)
 },

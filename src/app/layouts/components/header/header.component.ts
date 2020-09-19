@@ -8,28 +8,25 @@ import { AuthService } from 'src/app/modules/authentication/service/auth.service
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
+  profileLinks: Array<object> = [
+    {name: 'Profile', icon: 'zmdi zmdi-account-circle', url: "/settings/profile"},
+    {name: 'Settings', icon: 'zmdi zmdi-account-circle', url: "/settings/password"} 
+  ]
 
-  @Output() toggleSidebarForMe : EventEmitter<any> = new EventEmitter();
-  constructor(private _router: Router, private _authService: AuthService) { }
+  constructor(private _authService: AuthService, private _router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  toggleSideBar(){
-    this.toggleSidebarForMe.emit();
-    setTimeout(()=>{
-      window.dispatchEvent(
-        new Event('resize')
-      );
-    }, 300);
+  updateTitle(link: string){
+    //console.log("header here")
+    this.titleChange.emit(link);
   }
 
-  logoutUser(){
-    this._authService.logout();
-  }
-
-  navigate(link: string){
-    this._router.navigate([link])
+  logout(){
+      this._authService.logout();
+      this._router.navigate(['/login']);
   }
 
 }
