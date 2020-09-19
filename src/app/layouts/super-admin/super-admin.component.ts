@@ -10,8 +10,14 @@ export class SuperAdminComponent implements OnInit {
 
   pageTitle: string;
   links: Array<object> = [
-    {name: "Dashboard", icon: "md md-dashboard", url: "/"},
-    {name: "Upload Data", icon: "fa fa-upload", url: "/"},
+    {name: "Dashboard", icon: "md md-dashboard", url: "/admin/dashboard"},
+    {name: "Fleets", icon: "fa fa-car", url: "/", links: [{
+      name: "Fleet Managers", url: "/"
+    },
+    {
+      name: "Riders", url: "/"
+    }]
+  },
     {name: "Predict Match", icon: "fa fa-bar-chart-o", url: "/"},
     {name: "Custom Search", icon: "fa fa-search",url: "/"},
   ];

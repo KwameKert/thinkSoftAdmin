@@ -26,14 +26,27 @@
     <div class="container-fluid">
         <div id="navigation">
             <!-- Navigation Menu-->
-            <ul class="navigation-menu">
-                
-                <li  *ngFor="let link of data">
-                    <a  [routerLink]="[link.url]" (click)="updateTitle(link.name)" > 
-                        <i [class]="link.icon"></i>{{ link.name | titlecase}}
-                      </a>
-                </li>
+            <ul class="navigation-menu" >
+            
+                    <li class="has-submenu" *ngFor="let link of data">
+                        <a  [routerLink]="[link.url]" (click)="updateTitle(link.name)" *ngIf="!link.links; else has_submenu" > 
+                            <i [class]="link.icon"></i>{{ link.name | titlecase}}
+                          </a>
 
+                          <ng-template #has_submenu>
+                            <a href="#"><i [class]="link.icon"></i>{{link.name | titlecase}}</a>
+                            <ul class="submenu" *ngFor="let subLink of link.links">
+                                <li>
+                                    <a [routerLink]="[subLink.url]">{{subLink.name | titlecase }}
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                          </ng-template>
+                      
+                    </li>
+                    
+               
             </ul>
             <!-- End navigation menu -->
         </div> <!-- end #navigation -->
